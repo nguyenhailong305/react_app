@@ -5,8 +5,15 @@ class NoteItem extends Component {
   twoActionButton = () => {
     this.props.changeEditStatus(); //action 1
     //ham lay noi dung tron store  , de store update du lieu -- action 2
-    console.log(this.props.note);
+    // console.log(this.props.note);
     this.props.getEditData(this.props.note);
+  }
+
+  deleteData = () => {
+    // console.log(this.props.note.id);
+    this.props.getDeleteData(this.props.note.id);  
+    // console.log(this.props.note.title);
+    this.props.alertOn('Xoá ghi chú " ' + this.props.note.title + '" Thành Công ' )
   }
     render() {
         return (
@@ -18,8 +25,8 @@ class NoteItem extends Component {
                   
                 </a> 
                 <div className="btn-group float-right" >
-                <button class="btn btn-outline-danger mr-2 ml-auto  " onClick={() => this.twoActionButton()}  type="button"  >Sửa</button>
-                <button class="btn btn-outline-success ml-auto " type="button"  float="right" >Xóa</button>
+                <button className="btn btn-outline-danger mr-2 ml-auto  " onClick={() => this.twoActionButton()}  type="button"  >Sửa</button>
+                <button className="btn btn-outline-success ml-auto "  onClick={() => this.deleteData()} type="button"  float="right" >Xóa</button>
                 </div>
          
                 
@@ -47,12 +54,28 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         type:"Change_Edit_Status"
       })
     },
-    getEditData: (editOject) => {
-      dispatch({
-        type:"Get_Edit_Data",
+      getEditData: (editOject) => {
+        dispatch({
+          type:"Get_Edit_Data",
         editOject
       })
     },
+    getDeleteData: (deleteId) => {
+      dispatch({
+        type:"DELETE",
+      deleteId
+    })
+  },
+  alertOn: (AlertContent) => {
+    dispatch({
+      type:"Alert_On",AlertContent
+    })
+  },
+  alertOff: () => {
+    dispatch({
+      type:"Alert_Off"
+    })
+  },
   }
 }
 

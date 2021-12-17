@@ -5,6 +5,7 @@ import NoteForm from './NoteForm';
 import NoteList from './NoteList';
 import Nav from './Nav';
 import {connect} from 'react-redux';
+import AlertInfo from './AlertInfo';
 
 
 class App extends Component {
@@ -26,10 +27,11 @@ class App extends Component {
     noteData.once('value').then(function(snapshot) {
       // console.log(snapshot.val());
     })
-    console.log(noteData);
+    // console.log(noteData);
     return (
       <div>
       <Nav/>
+      <AlertInfo/>
        <div className="container">
            <div className="row">
             <NoteList/>
